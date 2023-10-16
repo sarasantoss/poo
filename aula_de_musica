@@ -1,0 +1,106 @@
+#include <iostream>
+//sistema simples para treinar os conceitos de herança, encapsulamento e boas praticas
+
+//arquivo de classes
+class Pessoa{
+private:
+    std::string nome;
+    int idade;
+    int cadastro;
+public:
+    std::string get_nome();
+    void set_nome(std::string no);
+    int get_idade();
+    void set_idade(int id);
+    int get_cadastro();
+    void set_cadastro(int cad);
+
+};
+
+class Aluno: public Pessoa{
+private:
+    std::string instrumento;
+    int aulas_assistidas;
+    int evolucao;
+    char aprovacao;
+public:
+    Aluno(std::string no, int id, int cad);
+    void AssistirAula();
+    bool Prova();
+    void Matricula(std::string inst);
+};
+
+//implementacao dos metodos
+std::string Pessoa::get_nome(){
+    return nome;
+}
+
+void Pessoa::set_nome(std::string no){
+    nome = no;
+}
+
+int Pessoa::get_idade(){
+    return idade;
+}
+
+void Pessoa::set_idade(int id){
+    idade = id;
+}
+
+int Pessoa::get_cadastro(){
+    return cadastro;
+}
+
+void Pessoa::set_cadastro(int cad){
+    cadastro = cad;
+}
+Aluno::Aluno(std::string no, int id, int cad){
+    set_nome(no);
+    set_idade(id);
+    set_cadastro(cad);
+
+}
+
+void Aluno::Matricula(std::string inst){
+    instrumento = inst;
+    aulas_assistidas = 0;
+    evolucao = 0;
+}
+
+void Aluno::AssistirAula(){
+    aulas_assistidas ++;
+    std::cout << "Aula assistida, o aluno foi aprovado?" << std::endl;
+    std::cin >> aprovacao;
+    if(Prova())
+        evolucao++;
+    std::cout << "O aluno " << get_nome() << " assistiu à " << aulas_assistidas << " aulas, e teve a evolução de " << evolucao << " XP." << std::endl;
+}
+
+bool Aluno::Prova(){
+    if(aprovacao == 's'){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+//Fluxo do sistema
+int main(){
+    std::string nome;
+    int idade;
+    int cadastro;
+
+    std::cout << "Digite o primeiro nome, idade e numero do cadastro do aluno" << std::endl;
+    std::cin >> nome;
+    std::cin >> idade;
+    std::cin >> cadastro;
+
+    Aluno* Novo_Aluno = new Aluno(nome , idade, cadastro);
+    Novo_Aluno->Matricula("Violão");
+    Novo_Aluno->AssistirAula();
+    Novo_Aluno->AssistirAula();
+    Novo__Aluno->AssistirAula();
+    Novo__Aluno->AssistirAula();
+
+    return 0;
+}
